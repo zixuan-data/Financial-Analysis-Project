@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 # 1. 设置中文字体，防止图表里的中文变成方块
 plt.rcParams['font.sans-serif'] = ['SimHei'] # Windows系统用黑体
-plt.rcParams['axes.unicode_minus'] = False
+plt.rcParams['axes.unicode_minus'] = False #可以显示负数
 
 print("正在读取最终干净的数据...")
 # 读取刚才第二步生成的干净文件
@@ -23,14 +23,14 @@ plt.ylabel('净利润 (元)', fontsize=12)
 # 把X轴的日期倾斜一下，防止字叠在一起
 plt.xticks(rotation=45)
 
-# 添加网格线，让图表看起来更专业
+# 添加网格线
 plt.grid(True, linestyle='--', alpha=0.6)
 plt.legend()
 
 # 3. 调整布局并保存图表
 plt.tight_layout() # 自动调整布局防遮挡
 plt.savefig("maotai_profit_trend.png", dpi=300)
-print("🎉 大功告成！图表已保存为 maotai_profit_trend.png！")
+print(" 图表已保存为 maotai_profit_trend.png！")
 
 # 在屏幕上显示图表
 plt.show()
