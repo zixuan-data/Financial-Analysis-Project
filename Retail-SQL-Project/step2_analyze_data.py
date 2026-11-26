@@ -24,7 +24,7 @@ print("\n--- 任务 1：各城市单月最高销售额 Top 5 ---")
 print(pd.read_sql_query(sql_task1, conn))
 
 # ==========================================
-# 任务 2：使用窗口函数，找出每个城市销售额最高的商品（RANK/DENSE_RANK）
+# 任务 2：找出每个城市销售额最高的商品（RANK/DENSE_RANK）
 # ==========================================
 sql_task2 = """
 WITH ProductSales AS (
@@ -60,7 +60,7 @@ print("\n--- 任务 3：各渠道客单价与购买人数 ---")
 print(pd.read_sql_query(sql_task3, conn))
 
 # ==========================================
-# 任务 4：找出复购用户（消费次数 >= 2 的用户），并提取他们的消费明细（子查询/HAVING）
+# 任务 4：找出复购用户（消费次数 >= 2 的用户），提取他们的消费明细（子查询/HAVING）
 # ==========================================
 sql_task4 = """
 SELECT 
@@ -88,7 +88,8 @@ matplotlib.rcParams['axes.unicode_minus'] = False
 
 # 修改一下刚才的 sql_task4，只取前 10 名
 sql_chart = """
-SELECT user_id, SUM(amount) AS total_amount
+SELECT user_id, 
+       SUM(amount) AS total_amount
 FROM sales_data
 GROUP BY user_id
 HAVING COUNT(order_id) >= 2
@@ -103,9 +104,9 @@ plt.bar(df_chart['user_id'], df_chart['total_amount'], color='skyblue')
 plt.title('Top 10 复购用户累计消费金额')
 plt.xlabel('用户 ID')
 plt.ylabel('累计消费金额 (元)')
-plt.xticks(rotation=45)
+plt.xticks(rotation=45)#45度防重叠
 
-# 保存图片
+# 保存图片，紧凑边缘把白边裁掉
 plt.savefig('retail_top_users.png', bbox_inches='tight')
 print("\n图表已保存为 retail_top_users.png")
 
