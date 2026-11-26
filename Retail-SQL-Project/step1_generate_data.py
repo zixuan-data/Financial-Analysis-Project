@@ -4,7 +4,7 @@ import random
 import sqlite3
 from datetime import datetime, timedelta
 
-# 1. 设置随机种子，保证每次生成的数据一样，方便你后面调错
+# 1. 设置随机种子，保证每次生成的数据一样，方便后面调错
 np.random.seed(42)
 random.seed(42)
 
@@ -54,10 +54,10 @@ for i in range(1, num_records + 1):
         'amount': amount
     })
 
-# 4. 转为 DataFrame 并保存
+# 4. 转 DataFrame 并保存
 df = pd.DataFrame(data)
 
-# 看看前5行长什么样
+# 看前5行
 print("生成的原始数据示例：")
 print(df.head())
 
@@ -66,4 +66,4 @@ conn = sqlite3.connect('retail_sales.db')
 df.to_sql('sales_data', conn, if_exists='replace', index=False)
 conn.close()
 
-print(f"\n成功！共生成 {num_records} 条数据，已存入 SQLite 数据库 'retail_sales.db' 的 'sales_data' 表。")
+print(f"\n成功!共生成 {num_records} 条数据，已存入 SQLite 数据库 'retail_sales.db' 的 'sales_data' 表。")
